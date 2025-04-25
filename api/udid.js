@@ -1,10 +1,8 @@
-// /api/udid.js
-
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 
-// 初始化 Firebase（請確保你在 .env 中設好變數）
+// Firebase 設定
 const firebaseConfig = {
   apiKey: "AIzaSyAWy8sDmp5Y2gL8UHij8q8GU9u4cj2Qfng",
   authDomain: "xiaohuli-sign.firebaseapp.com",
@@ -15,12 +13,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = getFirestore();
 
 export async function POST(req) {
   const body = await req.text();
-
-  // 嘗試從 XML 中提取 UDID
   const udidMatch = body.match(/<key>UDID<\/key>\s*<string>([^<]+)<\/string>/);
   const udid = udidMatch ? udidMatch[1] : null;
 
@@ -28,12 +24,10 @@ export async function POST(req) {
     return NextResponse.json({ error: 'UDID not found' }, { status: 400 });
   }
 
-  // 寫入 Firestore
   await setDoc(doc(db, 'udids', udid), {
     udid,
     timestamp: serverTimestamp()
   });
 
-  // 成功後跳轉頁面
   return NextResponse.redirect('https://xiaohuliii.vercel.app/udid.html');
 }

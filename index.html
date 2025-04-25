@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小狐狸簽平台</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffeef7, #f3f9ff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #ff5e9c;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      max-width: 420px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+    input, select {
+      padding: 10px;
+      margin: 10px 0;
+      width: 85%;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    input:focus {
+      border-color: #ff8dc7;
+      box-shadow: 0 0 5px #ffb1da;
+      outline: none;
+    }
+    button {
+      background-color: #ff5e9c;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e24887;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>小狐狸簽平台</h1>
+    <input type="text" placeholder="請輸入 UDID" />
+    <input type="text" placeholder="請輸入兌換碼（老用戶免填）" />
+    <div>
+      <label><input type="radio" name="sign" /> 狐狸輕簽</label>
+      <label><input type="radio" name="sign" /> 狐狸超簽</label>
+      <label><input type="radio" name="sign" /> 狐狸神簽</label>
+    </div>
+    <button>兌換安裝</button>
+    <p style="margin-top: 12px;">
+      <a href="udid.html" style="color:#ff5e9c; text-decoration: none;">查看 UDID</a>
+    </p>
+  </div>
+</body>
+</html>

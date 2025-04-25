@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>卡密後台</title>
+  
+<style>
+  body {
+    background: linear-gradient(135deg, #ffeef7, #f3f9ff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 40px;
+  }
+  h1, h2 {
+    color: #ff5e9c;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    max-width: 460px;
+    margin: auto;
+    padding: 30px 20px;
+  }
+  input, button, textarea {
+    width: 80%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  button {
+    background-color: #ff5e9c;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #e24887;
+  }
+  a {
+    color: #ff5e9c;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWy8sDmp5Y2gL8UHij8q8GU9u4cj2Qfng",
+      authDomain: "xiaohuli-sign.firebaseapp.com",
+      projectId: "xiaohuli-sign",
+      storageBucket: "xiaohuli-sign.appspot.com",
+      messagingSenderId: "827825939368",
+      appId: "1:827825939368:web:21e2ccaa12e74e8c57739d"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.generate = async () => {
+      const count = Number(document.getElementById("num").value);
+      const out = document.getElementById("output");
+      out.textContent = "";
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      for (let i = 0; i < count; i++) {
+        let code = "huli";
+        for (let j = 0; j < 6; j++) {
+          code += chars[Math.floor(Math.random() * chars.length)];
+        }
+        out.textContent += code + "\n";
+        await setDoc(doc(collection(db, "cards"), code), { used: false });
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="card">
+    <h1>卡密後台</h1>
+    <input id="num" type="number" placeholder="輸入生成數量" />
+    <button onclick="generate()">生成卡密</button>
+    <textarea id="output" readonly rows="10" placeholder="生成的卡密會出現在這裡"></textarea>
+  </div>
+</body>
+</html>

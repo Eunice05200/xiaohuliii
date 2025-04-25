@@ -29,5 +29,5 @@ export async function POST(req) {
     timestamp: serverTimestamp()
   });
 
-  return NextResponse.redirect('https://xiaohuliii.vercel.app/udid.html');
+  return NextResponse.redirect('https://xiaohuliii.vercel.app/udid-success.html');
 }
